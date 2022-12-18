@@ -63,7 +63,6 @@ async def send_welcome(message: types.Message):
     mycursor.execute(sql, val)
     myresult = mycursor.fetchall()
     if len(myresult) == 0:
-        print(1)
         sql = "INSERT INTO MeInComicsUsers (TelegramUserID) VALUES (%s)"
         val = (message.chat.id,)
         mycursor.execute(sql, val)
