@@ -60,7 +60,11 @@ async def send_welcome(message: types.Message):
     mycursor = get_cursor()
     sql = "SELECT * FROM MeInComicsUsers WHERE TelegramUserID = %s"
     val = (message.chat.id,)
-    mycursor.execute(sql, val)
+    try:
+        mycursor.execute(sql, val)
+    except:
+        print("An unknow error occured while trying to lauch bot. Trying to restart")
+        mycursor.execute(sql, val)
     myresult = mycursor.fetchall()
     if len(myresult) == 0:
         sql = "INSERT INTO MeInComicsUsers (TelegramUserID) VALUES (%s)"
