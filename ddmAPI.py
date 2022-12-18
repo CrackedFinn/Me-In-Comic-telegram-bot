@@ -10,7 +10,7 @@ load_dotenv()
 
 API_VERSION = 2
 USERAGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0"
-PROXY = os.getenv('TOKEN')
+PROXY = os.getenv('PROXY')
 
 
 def GetImage(picture_bytes, width, height):
