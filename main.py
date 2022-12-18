@@ -73,7 +73,6 @@ async def send_welcome(message: types.Message):
         mydb.commit()
     mycursor.close()
     # ADD NEW USER TO DB #
-
     await message.answer(
         "👨‍🎨 Hi! Using the bot *“Me In Comics”* _(formerly known as Different Dimension Me)_ anyone can easily create their own anime versions of their photos.\n\n*Just send me images in this chat and I will transform them!*",
         parse_mode="Markdown")
