@@ -32,7 +32,7 @@ def GetImage(picture_bytes, width, height):
         im.close()
         return cropped
     except IllegalPictureQQDDMApiResponseException:
-        return "The image provided is forbidden, try with another picture"
+        return "❌ The image provided is forbidden, try with another picture"
     except InvalidQQDDMApiResponseException as ex:
         if json.loads(ex.response_body)["code"]==1001:
             return "❌ It looks like there is no human face at the image. *Try uploading a photo of a person.*"
