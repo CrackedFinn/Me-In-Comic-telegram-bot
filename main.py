@@ -81,12 +81,12 @@ async def send_welcome(message: types.Message):
 
 
 @dp.message_handler(text="🛠️ Contact Support")  # Run action after pressing keyboard
-async def get_code(message: types.Message):
+async def get_support(message: types.Message):
     await message.reply("🛠️ You can contact support here: @EmojiCreatorSupportBot")
 
 
 @dp.message_handler(text="❔ About")  # Run action after pressing keyboard
-async def get_code(message: types.Message):
+async def get_about(message: types.Message):
     await message.reply(
         '❔ Using the bot *“Me In Comics”* _(formerly known as Different Dimension Me)_ anyone can easily create their own anime versions of their photos.\n\n*Just send me images in this chat and I will transform them!*',
         parse_mode='Markdown')
