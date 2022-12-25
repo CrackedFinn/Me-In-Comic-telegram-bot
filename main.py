@@ -65,11 +65,7 @@ async def send_welcome(message: types.Message):
     mycursor = get_cursor()
     sql = "SELECT * FROM MeInComicsUsers WHERE TelegramUserID = %s"
     val = (message.chat.id,)
-    try:
-        mycursor.execute(sql, val)
-    except:
-        print("An unknow error occured while trying to lauch bot. Trying to restart")
-        mycursor.execute(sql, val)
+    mycursor.execute(sql, val)
     myresult = mycursor.fetchall()
     if len(myresult) == 0:
         sql = "INSERT INTO MeInComicsUsers (TelegramUserID) VALUES (%s)"
@@ -77,6 +73,7 @@ async def send_welcome(message: types.Message):
         mycursor.execute(sql, val)
         mydb.commit()
     mycursor.close()
+    mydb.close()
     # ADD NEW USER TO DB #
     await message.answer(
         "👨‍🎨 Hi! Using the bot *“Me In Comics”* _(formerly known as Different Dimension Me)_ anyone can easily create their own anime versions of their photos.\n\n*Just send me images in this chat and I will transform them!*",
