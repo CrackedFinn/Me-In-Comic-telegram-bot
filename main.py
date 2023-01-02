@@ -47,7 +47,7 @@ async def handle_docs_photo(message):
     image = BytesIO()
     msg_photo = message.photo[-1]
     bytes = await msg_photo.download(destination_file=image)
-    converted_image_pil = ddmAPI.GetImage(bytes.read(), msg_photo["width"], msg_photo["height"])
+    converted_image_pil = await ddmAPI.GetImage(bytes.read(), msg_photo["width"], msg_photo["height"])
     if isinstance(converted_image_pil, str):  # Exception
         await msg.edit_text(text=converted_image_pil, parse_mode="Markdown")
     else:
@@ -87,10 +87,13 @@ async def get_support(message: types.Message):
 
 @dp.message_handler(text="❔ About")  # Run action after pressing keyboard
 async def get_about(message: types.Message):
-    await message.reply(
+    try:
+        await message.reply(
         '❔ Using the bot *“Me In Comics”* _(formerly known as Different Dimension Me)_ anyone can easily create their own anime versions of their photos.\n\n*Just send me images in this chat and I will transform them!*',
         parse_mode='Markdown')
+    except:
+        pass
 
 
 if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=False)
+    executor.start_polling(dp)
