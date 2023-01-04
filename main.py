@@ -82,7 +82,7 @@ async def send_welcome(message: types.Message):
 
 @dp.message_handler(text="🛠️ Contact Support")  # Run action after pressing keyboard
 async def get_support(message: types.Message):
-    await message.reply("🛠️ You can contact support here: @EmojiCreatorSupportBot")
+    await message.reply("🛠️ You can contact support here: @NoveSupportBot")
 
 
 @dp.message_handler(text="❔ About")  # Run action after pressing keyboard
