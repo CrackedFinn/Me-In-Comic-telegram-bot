@@ -13,7 +13,7 @@ USERAGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/10
 PROXY = os.getenv('PROXY')
 
 
-async def GetImage(picture_bytes, width, height):
+def GetImage(picture_bytes, width, height):
     if width >= height:
         image_is_wide = True  # image is wide / square
     else:
