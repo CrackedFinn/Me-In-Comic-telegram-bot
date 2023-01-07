@@ -21,7 +21,7 @@ async def fileHandle(message):
 
 
 @dp.message_handler(content_types=['photo'])
-async def handle_docs_photo(message):
+async def handle_docs_photo(message: types.Message):
     msg = await message.reply("*Processing...*", parse_mode="Markdown")
     image = BytesIO()
     msg_photo = message.photo[-1]
@@ -29,7 +29,7 @@ async def handle_docs_photo(message):
     loop = asyncio.get_event_loop()
     converted_image_pil = await loop.run_in_executor(None, ddmAPI.GetImage, bytes.read(), msg_photo["width"],
                                                      msg_photo["height"])
-    # converted_image_pil = ddmAPI.GetImage(bytes.read(), msg_photo["width"], msg_photo["height"]) deprecated
+    print(f"{message.from_user.id} started processing photo")
     if isinstance(converted_image_pil, str):  # Exception
         await msg.edit_text(text=converted_image_pil, parse_mode="Markdown")
     else:
