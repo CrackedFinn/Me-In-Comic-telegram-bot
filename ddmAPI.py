@@ -1,3 +1,5 @@
+import io
+
 from qqddm import AnimeConverter, InvalidQQDDMApiResponseException, IllegalPictureQQDDMApiResponseException
 from PIL import Image
 from io import BytesIO
@@ -24,17 +26,21 @@ def GetImage(picture_bytes, width, height):
     try:
         result = converter.convert(picture_bytes)
         url = [str(url) for url in result.pictures_urls][2]
-        im = Image.open(BytesIO(requests.get(url).content))
+        in_memory = BytesIO(requests.get(url).content)
+        im = Image.open(in_memory)
         if image_is_wide:
             cropped = im.crop((19, 19, 1097, 737))  # (left, top, right, bottom)
         else:
             cropped = im.crop((29, 31, 797, 1184))  # (left, top, right, bottom)
+        in_memory.seek(0)
+        in_memory.truncate(0)
         im.close()
+
         return cropped
     except IllegalPictureQQDDMApiResponseException:
         return "❌ The image provided is forbidden, try with another picture"
     except InvalidQQDDMApiResponseException as ex:
-        if json.loads(ex.response_body)["code"]==1001:
+        if json.loads(ex.response_body)["code"] == 1001:
             return "❌ It looks like there is no human face at the image. *Try uploading a photo of a person.*"
         else:
             return "❌ Oups... An error occurred while processing your photo. Please contact support with the following information:\n\n_" + f"API returned error ({ex}); response body: {ex.response_body}" + "_"
