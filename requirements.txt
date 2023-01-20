@@ -4,3 +4,4 @@ python-dotenv==0.21.0
 qqddm==0.0.3
 requests==2.28.1
 socksio==1.0.0
+httpx==0.23.1
